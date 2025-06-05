@@ -3,9 +3,7 @@ import { signInCallback, logOutCallback } from "@/composables/useFirebaseAuth";
 import router from "@/router";
 
 const login = async () => {
-    const allowedEmails = [
-        'capy.net@gmail.com',
-    ]
+  const allowedEmails = import.meta.env.VITE_ALLOWED_EMAILS?.split(',') || []
 
     const res = await signInCallback()
 
