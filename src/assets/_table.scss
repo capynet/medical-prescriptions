@@ -1,0 +1,33 @@
+.table {
+    width: 100%;
+    border-collapse: collapse;
+
+    thead {
+        tr {
+            th {
+                text-align: start;
+                color: gray;
+                padding: 8px;
+                font-size: medium;
+                border: 1px solid rgb(181, 179, 179);
+                border: collapse;
+            }
+        }
+    }
+
+    .search {
+        display: none;
+    }
+
+    tbody {
+        tr {
+            td {
+                border: 1px solid rgb(181, 179, 179);
+                border: collapse;
+                padding: 8px;
+                font-size: medium;
+                color: gray;
+            }
+        }
+    }
+}

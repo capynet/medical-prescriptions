@@ -1,0 +1,42 @@
+.filters {
+    font-size: small;
+    font-weight: 2px;
+    color: gray;
+    margin-bottom: 20px;
+
+    h4 {
+        font-size: small;
+        font-weight: normal;
+    }
+
+    .ais-MenuSelect {
+
+        select {
+            padding: 10px;
+            border: 1px solid rgb(181, 179, 179);
+            background-color: white;
+            color: gray;
+        }
+    }
+
+    .ais-SearchBox {
+        input {
+            padding: 10px;
+            border: 1px solid rgb(181, 179, 179);
+
+            &:focus {
+                outline: none;
+            }
+        }
+
+        button {
+            padding: 10px;
+            background-color: white;
+            border: 1px solid rgb(181, 179, 179);
+
+            &.ais-SearchBox-reset {
+                display: none;
+            }
+        }
+    }
+}
