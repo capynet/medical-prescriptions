@@ -1,24 +1,7 @@
 {
-  "extends": "@vue/tsconfig/tsconfig.web.json",
-  "include": [
-    "env.d.ts",
-    "src/**/*",
-    "src/**/*.vue"
-  ],
+  "extends": "./.nuxt/tsconfig.json",
   "compilerOptions": {
-    "baseUrl": ".",
-    "paths": {
-      "@/*": [
-        "./src/*"
-      ]
-    },
-    "types": [
-      "element-plus/global"
-    ]
-  },
-  "references": [
-    {
-      "path": "./tsconfig.config.json"
-    }
-  ]
+    "strict": true,
+    "types": ["@nuxtjs/tailwindcss"]
+  }
 }

@@ -1,0 +1,145 @@
+// This is your Prisma schema file
+// Learn more: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+// Users/Medical Staff
+model User {
+  id            String         @id @default(uuid())
+  created       DateTime       @default(now())
+  name          String
+  surname       String
+
+  // Relations
+  prescriptions Prescription[]
+  patients      Patient[]
+  medicines     Medicine[]
+
+  @@map("user")
+}
+
+// Affiliation Providers (Health Insurance Companies)
+model Provider {
+  id           String         @id @default(uuid())
+  created      DateTime       @default(now())
+  name         String
+  machineName  String         @unique
+
+  // Relations
+  plans        ProviderPlan[]
+  patients     Patient[]
+
+  @@map("provider")
+}
+
+// Provider Plans (Insurance Plans)
+model ProviderPlan {
+  id          String    @id @default(uuid())
+  providerId  String    @map("provider_id")
+  name        String
+  machineName String    @unique
+
+  // Relations
+  provider    Provider  @relation(fields: [providerId], references: [id], onDelete: Cascade)
+  patients    Patient[]
+
+  @@map("provider_plans")
+}
+
+// Patients
+model Patient {
+  id                  String        @id @default(uuid())
+  created             DateTime      @default(now())
+  updated             DateTime      @updatedAt
+  fullName            String        @map("fullName")
+  userId              String        @map("userId") // DNI
+  affiliationId       String        @map("affiliationId")
+  affiliationPlan     String        @map("affiliationPlan")
+  affiliationProvider String        @map("affiliationProvider")
+  author              String
+  fts                 String?       @db.Text // Full-text search field
+
+  // Relations
+  authorUser          User          @relation(fields: [author], references: [id])
+  provider            Provider      @relation(fields: [affiliationProvider], references: [id])
+  plan                ProviderPlan  @relation(fields: [affiliationPlan], references: [id])
+  prescriptions       Prescription[]
+
+  @@index([fullName])
+  @@index([userId])
+  @@index([affiliationId])
+  @@map("patient")
+}
+
+// Medicine Catalog (Vademecum)
+model Medicine {
+  id              String                  @id @default(uuid())
+  createdAt       DateTime                @default(now()) @map("created_at")
+  tradeName       String                  @map("tradeName")
+  activeSubstance String                  @map("activeSubstance")
+  author          String
+  fts             String?                 @db.Text // Full-text search field
+
+  // Relations
+  authorUser      User                    @relation(fields: [author], references: [id])
+  prescriptions   PrescriptionMedicine[]
+
+  @@index([tradeName])
+  @@index([activeSubstance])
+  @@map("vademecum")
+}
+
+// Diagnoses
+model Diagnosis {
+  id           String         @id @default(uuid())
+  name         String
+  machineName  String         @unique
+
+  // Relations
+  prescriptions Prescription[]
+
+  @@map("diagnosis")
+}
+
+// Prescriptions
+model Prescription {
+  id          String                  @id @default(uuid())
+  createdAt   DateTime                @default(now()) @map("created_at")
+  author      String
+  diagnosis   String
+  patientId   String                  @map("patient_id")
+
+  // Relations
+  authorUser  User                    @relation(fields: [author], references: [id])
+  diagnosisInfo Diagnosis             @relation(fields: [diagnosis], references: [id])
+  patient     Patient                 @relation(fields: [patientId], references: [id])
+  medicines   PrescriptionMedicine[]
+
+  @@index([createdAt])
+  @@index([patientId])
+  @@index([author])
+  @@map("prescription")
+}
+
+// Junction table: Prescription - Medicines
+model PrescriptionMedicine {
+  id             String       @id @default(uuid())
+  prescriptionId String       @map("prescription_id")
+  medicineId     String       @map("medicine_id")
+  qty            Int
+  instructions   String       @db.Text
+
+  // Relations
+  prescription   Prescription @relation(fields: [prescriptionId], references: [id], onDelete: Cascade)
+  medicine       Medicine     @relation(fields: [medicineId], references: [id])
+
+  @@unique([prescriptionId, medicineId])
+  @@map("prescription_medicines")
+}

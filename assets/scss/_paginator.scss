@@ -1,0 +1,40 @@
+.ais-Pagination {
+
+    ul {
+        display: flex;
+        justify-content: center;
+    }
+
+    li {
+        list-style: none;
+        margin-right: 5px;
+
+        &.ais-Pagination-item--selected {
+
+            a,
+            span {
+                background-color: #409eff;
+                color: white;
+            }
+        }
+
+        a,
+        span {
+            display: block;
+            text-align: center;
+            color: black;
+            text-decoration-line: none;
+            font-weight: 400;
+            background-color: #f0f2f5;
+            padding: 15px;
+            aspect-ratio: 1 / 1;
+            width: 19px;
+            border-radius: 3px;
+        }
+    }
+
+    a:hover,
+    span:hover {
+        color: #409eff;
+    }
+}
