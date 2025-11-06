@@ -6,27 +6,26 @@ export default defineNuxtConfig({
 
   modules: [
     '@nuxtjs/tailwindcss',
-    'nuxt-primevue',
+    '@primevue/nuxt-module',
     '@sidebase/nuxt-auth',
     '@prisma/nuxt',
   ],
 
   css: [
-    'primevue/resources/themes/aura-light-blue/theme.css',
     'primeicons/primeicons.css',
     '~/assets/scss/main.scss',
   ],
 
   primevue: {
     options: {
+      theme: {
+        preset: 'Aura',
+        options: {
+          prefix: 'p',
+          darkModeSelector: '.dark',
+        },
+      },
       ripple: true,
-      inputStyle: 'filled',
-    },
-    components: {
-      include: '*',
-    },
-    directives: {
-      include: ['Tooltip', 'Ripple'],
     },
   },
 
