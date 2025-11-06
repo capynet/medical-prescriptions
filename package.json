@@ -9,7 +9,7 @@
     "build": "nuxt build",
     "generate": "nuxt generate",
     "preview": "nuxt preview",
-    "postinstall": "nuxt prepare && prisma generate",
+    "postinstall": "nuxt prepare && prisma generate || echo 'Prisma generation failed, you may need to run pnpm prisma:generate manually'",
     "prisma:migrate": "prisma migrate dev",
     "prisma:studio": "prisma studio",
     "prisma:generate": "prisma generate",
