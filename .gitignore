@@ -8,6 +8,9 @@ dist
 # Node dependencies
 node_modules
 
+# Node compile cache
+node-compile-cache/
+
 # Package manager lock files (we use pnpm)
 yarn.lock
 package-lock.json
