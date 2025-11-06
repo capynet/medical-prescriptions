@@ -26,7 +26,8 @@ Sistema web moderno para la gestión de recetas médicas, pacientes y vademecum 
 
 ### Prerrequisitos
 
-- Node.js 20+
+- Node.js 22 LTS (recomendado) o 20+
+- pnpm 9+ (instalar con `npm install -g pnpm` o `corepack enable`)
 - PostgreSQL 15+
 - Cuenta de Google Cloud (para OAuth)
 
@@ -42,7 +43,7 @@ cd medical-prescriptions
 2. **Instalar dependencias**
 
 ```bash
-npm install
+pnpm install
 ```
 
 3. **Configurar variables de entorno**
@@ -62,19 +63,19 @@ Edita `.env` con tus credenciales:
 
 ```bash
 # Generar cliente de Prisma
-npm run prisma:generate
+pnpm prisma:generate
 
 # Crear tablas
-npm run prisma:push
+pnpm prisma:push
 
 # Poblar con datos de ejemplo (opcional)
-npx tsx prisma/seed.ts
+pnpm exec tsx prisma/seed.ts
 ```
 
 5. **Ejecutar en desarrollo**
 
 ```bash
-npm run dev
+pnpm dev
 ```
 
 La aplicación estará disponible en `http://localhost:3000`
@@ -152,21 +153,21 @@ Ver [schema.prisma](./prisma/schema.prisma) para detalles completos.
 
 ```bash
 # Desarrollo
-npm run dev
+pnpm dev
 
 # Build para producción
-npm run build
+pnpm build
 
 # Preview de producción
-npm run preview
+pnpm preview
 
 # Linting
-npm run lint
+pnpm lint
 
 # Base de datos
-npm run prisma:studio      # Abrir Prisma Studio
-npm run prisma:migrate     # Crear migración
-npm run prisma:push        # Aplicar schema sin migración
+pnpm prisma:studio      # Abrir Prisma Studio
+pnpm prisma:migrate     # Crear migración
+pnpm prisma:push        # Aplicar schema sin migración
 ```
 
 ## 🚢 Despliegue

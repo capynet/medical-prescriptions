@@ -62,9 +62,9 @@ NUXT_PUBLIC_APP_URL="http://localhost:3000"
 ### 3. Instalar Dependencias
 
 ```bash
-npm install
+pnpm install
 # o
-yarn install
+pnpm install
 ```
 
 ### 4. Configurar la Base de Datos
@@ -75,30 +75,30 @@ Si ya tienes datos en Supabase, Prisma puede conectarse directamente:
 
 ```bash
 # Generar el cliente de Prisma
-npm run prisma:generate
+pnpm prisma:generate
 
 # Crear las migraciones basadas en el esquema
-npm run prisma:migrate
+pnpm prisma:migrate
 
 # (Opcional) Poblar con datos de ejemplo
-npx tsx prisma/seed.ts
+pnpm exec tsx prisma/seed.ts
 ```
 
 #### Opción B: Nueva instalación
 
 ```bash
 # Crear las tablas en PostgreSQL
-npm run prisma:push
+pnpm prisma:push
 
 # Poblar con datos de ejemplo
-npx tsx prisma/seed.ts
+pnpm exec tsx prisma/seed.ts
 ```
 
 ### 5. Ejecutar la Aplicación
 
 ```bash
 # Desarrollo
-npm run dev
+pnpm dev
 
 # La aplicación estará disponible en http://localhost:3000
 ```
@@ -315,23 +315,23 @@ Todas las rutas de API están en `/server/api/`:
 
 ```bash
 # Desarrollo
-npm run dev
+pnpm dev
 
 # Build para producción
-npm run build
+pnpm build
 
 # Preview del build
-npm run preview
+pnpm preview
 
 # Prisma
-npm run prisma:migrate      # Crear migración
-npm run prisma:studio       # Abrir Prisma Studio
-npm run prisma:generate     # Generar cliente
-npm run prisma:push         # Push schema sin migración
+pnpm prisma:migrate      # Crear migración
+pnpm prisma:studio       # Abrir Prisma Studio
+pnpm prisma:generate     # Generar cliente
+pnpm prisma:push         # Push schema sin migración
 
 # Linting
-npm run lint
-npm run lint:fix
+pnpm lint
+pnpm lint:fix
 ```
 
 ---
@@ -375,7 +375,7 @@ WORKDIR /app
 COPY package*.json ./
 RUN npm ci
 COPY . .
-RUN npm run build
+RUN pnpm build
 
 ENV NUXT_HOST=0.0.0.0
 ENV NUXT_PORT=3000
@@ -389,13 +389,13 @@ CMD ["node", ".output/server/index.mjs"]
 
 ### Error: "Prisma Client no generado"
 ```bash
-npm run prisma:generate
+pnpm prisma:generate
 ```
 
 ### Error: "Cannot find module '@prisma/client'"
 ```bash
-npm install
-npm run prisma:generate
+pnpm install
+pnpm prisma:generate
 ```
 
 ### Error de conexión a la base de datos
@@ -418,10 +418,10 @@ Si tienes datos en Firebase o Supabase legacy:
 
 ```bash
 # Revisar cambios que se aplicarán
-npm run prisma:migrate -- --create-only
+pnpm prisma:migrate -- --create-only
 
 # Aplicar migración
-npm run prisma:migrate
+pnpm prisma:migrate
 ```
 
 ---
